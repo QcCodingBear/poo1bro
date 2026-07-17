@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Continue'
 $dossierProgramme = Split-Path -Parent $PSScriptRoot
 Set-Location $dossierProgramme
 
-# Recupere uniquement ce que le parent a deja publie.
+# Recupere uniquement les missions que Doc T a deja publiees pour Young Bro.
 if ((Get-Command git -ErrorAction SilentlyContinue) -and (Test-Path '.git' -PathType Container)) {
     git pull --ff-only
     if ($LASTEXITCODE -ne 0) {
