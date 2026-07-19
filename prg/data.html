@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
-<meta name="cours-niveau" content="1" />
+<meta name="cours-niveau" content="2" />
 <meta name="tiddlywiki-version" content="5.1.17" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -360,27 +360,27 @@ Error message and password prompt
 
 <li>01.Exercices</li>
 
+<li>02 Variables</li>
 
+<li>02 Variables - Impression</li>
 
+<li>02.01 Introduction</li>
 
+<li>02.02 La nomenclature</li>
 
+<li>02.03 Les types de variables</li>
 
+<li>02.04 Les conversions de types</li>
 
+<li>02.05 Les constantes</li>
 
+<li>02.06 L'affichage à la console</li>
 
+<li>02.07 La saisie clavier</li>
 
+<li>02.08 Variables nullables</li>
 
-
-
-
-
-
-
-
-
-
-
-
+<li>02.Exercices</li>
 
 
 
@@ -10297,17 +10297,391 @@ Notez de plusque chaque instruction est terminée par un point-virgule: `;`
 #* Si on choisit «p», alors calculera (num1 + num2)^^num3^^
 #&gt; Évidemment, le programme doit également afficher ce 3e nombre dans ses sorties à l'écran!</pre>
 </div>
+<div bag="default" created="20210208125719586" modified="20241014132759980" revision="0" tags="[[Table des matières]]" title="02 Variables" type="text/vnd.tiddlywiki">
+<pre>&lt;&lt;ssections&gt;&gt;</pre>
+</div>
+<div created="20241008122948065" modified="20241008123025270" title="02 Variables - Impression">
+<pre>&lt;&lt;TouteSection 02&gt;&gt;</pre>
+</div>
+<div bag="default" created="20210208125757905" modified="20241014143151228" revision="0" tags="[[02 Variables]]" title="02.01 Introduction" type="text/vnd.tiddlywiki">
+<pre>Une ''variable'' en informatique est, tout comme en mathématique, une sorte de «contenant» auquel on donne une étiquette et dans lequel on insère (affecte) une valeur. Par contre, dans plusieurs langages de programmation (dont le C#), on devra spécifier un [[type|02.03 Les types de variables]] au moment de déclarer (créer) une variable.
+
+```cs
+// Déclare (crée) et définit (affecte une valeur à) une variable «age» de type nombre entier
+int age = 32;
+
+// Déclare et définit une variable «makeKg» de type nombre réel
+double masseKg = 63.64;
+
+// Déclare et définit une variable «prenom» de type chaîne de caractères
+string prenom = &quot;Eric&quot;;
+```
+
+[img[img/variables_boites.png]]
+
+* Les contenants en question seront en fait des espaces réservés créés dans la mémoire de l'ordinateur lors de l'exécution du programme. Le cours //Systèmes d'exploitation// aborde plus spécifiquement comment les valeurs sont stockées dans la mémoire au format binaire (en 0 et 1).
+
+* Comme on peut le voir dans l'extrait de code ci-dessus, en C# on affecte (assigne) une valeur à une variable en utilisant le symbole `=` (ce qui n'est pas le cas dans tous les langages; on rencontre aussi assez souvent `:=` comme symbole d'affectation).
+
+* Les termes qui apparaissent en ''gras'' dans l'extrait de code ci-dessus sont des [[types de variables|02.03 Les types de variables]]; on doit toujours donner le type d'une variable la ''première fois'' qu'elle apparaît, ce qu'on appelle aussi la ''déclaration''.
+
+* Lorsqu'une variable a reçu une valeur, on dit qu'elle est ''définie'' ou ''initialisée''. Il est aussi possible de ''déclarer'' une variable sans la définir (on pourra lui affecter une valeur plus tard):&lt;div&gt;
+
+```cs
+// Déclare une variable «nbEnfants» de type entier, mais sans la définir (lui donner de valeur)
+int nbEnfants;
+```
+&lt;/div&gt;
+
+* Sauf exception, on peut écraser (remplacer) la valeur d'une variable déjà définie; dans ce cas, puisque la déclaration est déjà faite, on n'a pas besoin de répéter le type:&lt;div&gt;
+
+```cs
+// On remplace l'ancienne valeur de la variable «age» par une nouvelle valeur (43 ici)
+age = 43;
+```
+&lt;/div&gt;
+
+! Essayez-le!
+
+Modifiez la valeur des variables ci-dessous et cliquez sur ''Run'' pour voir le résultat!
+
+&lt;iframe width=&quot;100%&quot; height=&quot;475&quot; src=&quot;https://dotnetfiddle.net/Widget/7fsTyc&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;</pre>
+</div>
+<div bag="default" created="20210208132837986" modified="20241024141849156" revision="0" tags="[[02 Variables]]" title="02.02 La nomenclature" type="text/vnd.tiddlywiki">
+<pre>Il existe différentes philosophies de nomenclature des variables et autres éléments en informatique et d'un langage à l'autre, mais pour le C# on vous demande de respecter les [[conventions établies par Microsoft|https://docs.microsoft.com/fr-fr/dotnet/standard/design-guidelines/naming-guidelines]], dont voici les principales lignes directrices:
+
+* Choisissez des noms ''significatifs'', qui permettent de facilement comprendre à quoi sert l'élément nommé;
+*&gt; p.ex., &lt;font color=&quot;green&quot;&gt;''largeur''&lt;/font&gt; et &lt;font color=&quot;green&quot;&gt;''hauteur''&lt;/font&gt; seront mieux que &lt;font color=&quot;red&quot;&gt;''a''&lt;/font&gt; et &lt;font color=&quot;red&quot;&gt;''b''&lt;/font&gt;, qui ne veulent rien dire
+
+* Utilisez le «CamelCase» pour nommer les variables et objets; les noms de variables simples commencent souvent (mais pas obligatoirement) avec une minuscule, alors que les autres éléments (propriétés, classes, méthodes...) commencent avec une majuscule. N’utilisez pas de traits de soulignement (« _ »), de traits d’union (« - ») ou tout autre caractère non alphanumérique (une exception courante étant par contre d'utiliser le trait souligné pour [[préfixer des noms de champs|09.08.04 Champs et propriétés associées]]);
+*&gt; p.ex., &lt;font color=&quot;green&quot;&gt;''largeurRectangle''&lt;/font&gt; plutôt que &lt;font color=&quot;red&quot;&gt;''largeur_rectangle''&lt;/font&gt;.
+
+* Choisissez des noms d’identificateur facilement lisibles.
+*&gt; p.ex., , &lt;font color=&quot;green&quot;&gt;''DispositionHorizontale''&lt;/font&gt; est plus lisible en français que &lt;font color=&quot;red&quot;&gt;''HorizontaleDisposition''&lt;/font&gt;.
+
+* Préférez la lisibilité par rapport à la concision.
+*&gt; &lt;font color=&quot;green&quot;&gt;''DefilementHorizontal''&lt;/font&gt; est mieux que &lt;font color=&quot;red&quot;&gt;''DefilementX''&lt;/font&gt; (une référence cachée à l’axe cartésien X), et &lt;font color=&quot;green&quot;&gt;''largeur''&lt;/font&gt; est mieux que simplement &lt;font color=&quot;red&quot;&gt;''l''&lt;/font&gt;.
+
+* N’utilisez pas la notation hongroise (c.-à-d. donner le type de la variable dans son nom; comme p. ex.: &lt;font color=&quot;red&quot;&gt;''intUnEntier''&lt;/font&gt;).
+
+* Évitez d’utiliser des identificateurs qui sont en conflit avec des mots clés de langages de programmation largement utilisés.
+*&gt; p.ex.: ''&lt;font color=&quot;red&quot;&gt;print, delete, number...&lt;/font&gt;''
+
+*  N’utilisez pas d’abréviations ou de contractions dans les noms d’identificateurs.
+*&gt; p.ex., &lt;font color=&quot;green&quot;&gt;''OuvrirFenetre''&lt;/font&gt; plutôt que &lt;font color=&quot;red&quot;&gt;''OuvFen''&lt;/font&gt;
+
+* Évitez autant que possible les acronymes; une exception peut être faite s'ils sont largement connus et que le contexte s'y prête.
+
+&lt;p class=&quot;boite stop&quot;&gt;
+
+! Les accents
+
+!! Bien que Visual Studio permette les noms de variables avec des accents français, pour des raisons de portabilité et de compatibilité, cette pratique est à proscrire: ''on créera donc toujours des noms de variables sans accents''.
+&lt;/p&gt;</pre>
+</div>
+<div bag="default" created="20210208131812543" modified="20241014145931589" revision="0" tags="[[02 Variables]]" title="02.03 Les types de variables" type="text/vnd.tiddlywiki">
+<pre>Comme vu [[précédemment|02.01 Introduction]], lorsqu'on déclare une variable, on doit spéficfier son ''type''.
+
+Le type d'une variable servira au compilateur à allouer l'espace nécessaire en mémoire et à contrôler les opérations permises entre différentes variables (p.ex., il serait illogique de multiplier deux chaînes de caractères entre elles).
+
+C# comprend [[plusieurs types de base|https://docs.microsoft.com/fr-fr/dotnet/csharp/language-reference/builtin-types/built-in-types]], mais ceux avec lesquels nous travaillerons principalement pour commencer sont:
+
+* ''int'': désigne une variable de type nombre entier (peut être négatif ou positif) (ex.: 12, 6789, -743...)&lt;div&gt;
+
+```cs
+// Déclare une variable «age» contenant l'âge d'une personne
+int age = 37;
+```
+&lt;/div&gt;
+
+* ''decimal'', ''double'' et ''float'': désignent une variable de type nombre réel (ex: -45.9862, 3456.93783, ...)
+*&gt; Les types ''double'' et ''float'' sont très utilisés pour les nombres réels: ils offrent l'avantage d'être techniquement plus performants, mais ont l'inconvénient d'être moins précis que ''decimal''; beaucoup de programmeurs vont aussi les utiliser simplement par habitude, puisque ce sont des types que l'on retrouve dans plusieurs autres langages.&lt;p&gt;Fait à noter, on affecte une valeur littérale ''decimal'' en suffixant un ''m'' à la valeur, et une valeur littérale ''float'' en suffixant un ''f'', alors qu'aucun suffixe n'est nécessaire avec les types ''int'' ou ''double''.&lt;/p&gt;&lt;div&gt;
+
+```cs
+// Déclare une variable de type 'double' et une autre de type 'decimal' (noter le «m» pour le type 'decimal' et le «f» pour le type 'float')
+double masse = 70.51;
+float poids = 155.12f;
+decimal taille = 1.75m;
+```
+Tous les types réels supportent également la notation exponentielle, mais elle est plus «naturelle» avec le type ''double'' (notamment pour l'affichage et la [[conversion|02.04 Les conversions de types]]):
+
+```cs
+// Déclare une variables de type réel en utilisant la notation exponentielle
+double masseElectron = 9.11e-31;
+```
+&lt;/div&gt;
 
 
+* ''string'': désigne une variable de type chaîne de caractères (ex.: &quot;Bonjour&quot;, &quot;Mon n° de téléphone est le: 123 456-7890&quot;, &quot;Quel est votre nom?&quot;)
+** les chaînes de caractères sont déimitées par des guillemets (`&quot; &quot;`)&lt;div&gt;
+
+```cs
+// Déclare une variable «nom» contenant le nom d'une personne
+string nom = &quot;Émile Tremblay&quot;;
+```
+&lt;/div&gt;
+**&lt;div class=&quot;boite note&quot;&gt;
+
+!! Contrairement aux noms d'objets (variables, méthodes, classes, etc.), il n'y a aucune contre-indication à mettre des accents dans les chaînes de caractères.
+&lt;/div&gt;
+
+** tout ce qui est entre guillemets est nécessairement de type ''string'', même s'il s'agit d'un nombre:&lt;div&gt;
+
+```cs
+/* Déclare une variable «combinaison» de type string;
+  les chiffres ici seront traités comme de simples caractères 
+  dans un texte et non comme des valeurs numériques */
+string combinaison = &quot;1234&quot;;
+```
+&lt;/div&gt;
+
+* ''char'': désigne un seul caractère (ex.: 'a', 'B', '$', '%', etc.)
+** les caractères sont délimités par des apostrophes (`' '`)&lt;div&gt;
+
+```cs
+// Déclare une variable «vitamine» contenant une lettre
+char vitamine = 'E';
+```
+&lt;/div&gt;
+
+* ''bool'': désigne une variable booléenne, c.-à-d. une variable qui est soit vraie (''true''), soit fausse (''false'')&lt;div&gt;
+
+```cs
+// Déclare une variable «reussi» qui contient soit vrai, soit faux
+bool reussi = false;
+```
+&lt;/div&gt;
+
+&lt;p class=&quot;boite stop&quot;&gt;
+
+! Le type ''var''
+
+Depuis la version 3.0 de C#, il existe un type générique appelé ''var''. Une variable de type ''var'' peut contenir //n'importe quelle valeur//, peu importe son type formel.
+
+!!! Avantages:
+* moins long à écrire
+* pas à se casser la tête à choisir le bon type
+* plus facile à maintenir si des types retournés changent
+
+!!! Inconvénients:
+* perte de clarté (d'information) sur la nature et possiblement le rôle attendu des variables
+* plus de risques de bogues dus à des interactions illogiques entre les variables
+* perte de contrôle automatique de certaines contraintes (p.ex., nombre entier vs nombre réel)
+
+!! ''Dans le présent cours, pour des raisons pédagogiques et de bonne pratique, l'utilisation du type «var» sera __//INTERDITE//__.''
+
+&lt;/p&gt;
+</pre>
+</div>
+<div bag="default" created="20210208150219255" modified="20241014153033724" revision="0" tags="video [[02 Variables]]" title="02.04 Les conversions de types" type="text/vnd.tiddlywiki">
+<pre>Si deux variables contiennent une chaîne de caractères rerésentant des nombres (p.ex., &quot;10&quot; et &quot;20&quot;, en représentation ASCII), et que l'on veuille effectuer une opération mathématique entre les deux, cette opération sera impossible si ces chaînes ne sont pas d'abord converties en véritables nombres en mémoire; il y aura nécessité d'effectuer une ''conversion de type''. Le même besoin sera exprimé si on désire plutôt afficher à l'écran des nombres: ils devront d'abord être convertis en chaînes de caractères affichables.
+
+Certains langages sont dits //faiblement typés// et d'autres //fortement typés//.
+
+* Un ''langage faiblement typé'' est un langage où les conversions entre les types seront implicites (donc sans intervention nécessaire du programmeur); ces langages ont habituellement peu de types formels.
+*&gt; P.ex., en langage Perl, il y a seulement trois types formels de variables, à savoir le type «scalaire», le type «tableau» et le type «tableau associatif»; il n'y a pas de déclaration de type nécessaire: seuls la syntaxe et le contexte le détermineront; ainsi, on pourra additionner deux chaînes de caractères si elles représentent des nombres, car Perl fera automatiquement la conversion numérique des chaînes. 
+
+* Un ''langage fortement typé'' est un langage où les conversions entre les types doivent être explicites (donc avec intervention nécessaire du programmeur); ces langages ont souvent plusieurs types formels.
+*&gt; Le langage C# est fortement typé: il comprend [[plus d'une dizaine de types de base|https://docs.microsoft.com/fr-fr/dotnet/csharp/language-reference/builtin-types/built-in-types]], et il est parfois nécessaire d'effectuer une conversion entre ces différents types. Par exemple, dans les [[exercices de la section 1|01.Exercices]], on a dû utiliser `Convert.ToInt32()` et `Convert.ToDouble()` pour convertir les chaînes récupérées du clavier en nombres sur lesquels appliquer des opérations mathématiques.
+
+!! Méthodes de conversion
+
+Lorsque l'on doit convertir des types, il y a essentiellement trois façons de faire; elles sont, ''par ordre de préférence'' (selon la disponibilité):
+
+# ''Conversion implicite'' (automatique): il arrive que, dans certains contextes, le compilateur C# reconnaisse le type désiré et puisse faire la conversion automatiquement sans intervention du programmeur.&lt;div&gt;
+
+!!! Exemple 2.4a -- Conversions implicites&lt;iframe width=&quot;100%&quot; height=&quot;475&quot; src=&quot;https://dotnetfiddle.net/Widget/zXt4MJ&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+# ''Conversion par transtypage'' (//type casting//): pour des types «rapprochés» (comme des nombres), on peut souvent forcer la conversion en préfixant le type désiré entre parenthèses.
+#&gt;P. ex.:&lt;div&gt;
+
+```cs
+// Déclare la variable «var1» de type «decimal et de valeur 12»
+decimal var1 = 12m;
+
+// Convertit la valeur de la variable «var1» en type double pour la stocker dans «var2», de type double (mais la variable «var1» demeure de type «decimal»)
+double var2 = (double)var1;
+```
+
+Et on peut convertir aussi le résultat d'expressions, pas seulement des variables:
+
+```cs
+decimal var1 = 12m;
+decimal var2 = 13m;
+
+// Convertit en double la somme de var1 et var2
+double somme = (double)(var1 + var2);
+```
+
+On peut faire autant de conversions que nécessaires à l'intérieur d'une même instruction:
+
+!!! Exemple 2.4b -- Conversions par transtypage&lt;iframe width=&quot;100%&quot; height=&quot;475&quot; src=&quot;https://dotnetfiddle.net/Widget/PahdBe&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;/div&gt;
+
+# ''Conversion par une routine spécialisée'': p.ex., [[Sytem.Convert|https://docs.microsoft.com/fr-fr/dotnet/api/system.convert?view=net-8.0]], que vous avez utilisée dans les [[exercices de la section 01|01.Exercices]] (méthodes ``Convert.ToInt32()`` et ``Convert.ToDouble()``) est une classe qui offre plusieurs méthodes (routines) de conversion entre types (mais il y a d'autres moyens, que nous verrons [[plus tard|04.05 TryParse()]]).
+
+!! Conversion de nombres en notation exponentielle
+
+Fait également important à noter, le type ''double'' supporte naturellement la notation exponentielle lorsqu'un nombre est converti depuis un type ''string'' avec la classe ''System.Convert'', ce qui n'est pas le cas des autres types, qui demandent un peu plus d'acrobaties en ce sens.
+
+```cs
+// Déclare une variable de type «string»
+string masseElectronStr = &quot;9.11e-31&quot;;
+		
+// Convertit en «double» la valeur de la variable masseElectronStr pour la stocker dans une variable de type «double»
+double masseElectron = Convert.ToDouble(masseElectronStr);
+```
 
 
+&lt;!--
+---
+&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://web.microsoftstream.com/embed/video/9c59d08d-821e-4895-bff9-9fb5aab25fa6?autoplay=false&amp;amp;showinfo=true&quot; allowfullscreen style=&quot;border:none;&quot;&gt;&lt;/iframe&gt;
+--&gt;</pre>
+</div>
+<div bag="default" created="20210209174907984" modified="20241014153842039" revision="0" tags="video [[02 Variables]]" title="02.05 Les constantes" type="text/vnd.tiddlywiki">
+<pre>On peut protéger la valeur d'une variable en la déclarant avec ''const'', car cela aura pour effet d'en empêcher complètement la modification.
 
+!!! Exemple 2.5a -- Utilisation de ''const''&lt;iframe width=&quot;100%&quot; height=&quot;475&quot; src=&quot;https://dotnetfiddle.net/Widget/ePqDzO&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
 
+&lt;div class=&quot;boite note&quot;&gt;
 
+!! Comme dans l'exemple ci-dessus, on utilisera habituellement ''const'' pour stocker des constantes scientifiques ou mathématiques, mais aussi pour protéger toute variable dont la valeur ne doit pas changer.
+&lt;/div&gt;
 
+&lt;!--
+---
 
+&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://web.microsoftstream.com/embed/video/d5957386-4232-4e14-bc26-c914ef29eeb6?autoplay=false&amp;amp;showinfo=true&quot; allowfullscreen style=&quot;border:none;&quot;&gt;&lt;/iframe&gt;
+--&gt;</pre>
+</div>
+<div bag="default" created="20210209150258694" list="" modified="20241014154433869" revision="0" tags="video [[02 Variables]]" title="02.06 L'affichage à la console" type="text/vnd.tiddlywiki">
+<pre>On voudra souvent afficher du texte ou la valeur de variables définies. À la console, on utilisera principalement pour ce faire les méthodes `System.Console.Write()` (qui n'ajoute pas de retour de ligne automatique) et `System.Console.WriteLine()` (qui ajoute un retour de ligne à la fin de l'affichage).
 
+Pour ces deux méthodes, on place entre les parenthèses le contenu à afficher (ce sont les ''arguments'' passés à la méthode). Il y a plusieurs façons d'utiliser ces méthodes (tous les exemples ci-dessous afficheront le même texte):
 
+!!! Exemple 2.6a -- Write() et WriteLine() avec concaténation, formattage composite et interpolation&lt;iframe width=&quot;100%&quot; height=&quot;1000&quot; src=&quot;https://dotnetfiddle.net/Widget/CPh1gT&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+! Les caractères spéciaux
+
+* Si jamais on a besoin d'écrire des guillemets anglais à l'intérieur d'une chaîne, on peut les échapper avec une barre oblique inverse:&lt;div&gt;
+
+!!! Exemple 2.6b -- Caractères spéciaux&lt;iframe width=&quot;100%&quot; height=&quot;475&quot; src=&quot;https://dotnetfiddle.net/Widget/uA4vfD&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+* Il existe aussi certains [[caractères de formattage|https://docs.microsoft.com/fr-fr/cpp/c-language/escape-sequences?view=msvc-160]], dont notamment:&lt;div&gt;
+
+!!! Exemple 2.6c -- Caractères de formattage&lt;iframe width=&quot;100%&quot; height=&quot;475&quot; src=&quot;https://dotnetfiddle.net/Widget/4tB1mA&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+! Le formattage avancé
+
+Il existe une syntaxe plus avancée permettant de [[formatter avec précision|https://docs.microsoft.com/fr-fr/dotnet/api/system.string.format?view=net-5.0#the-format-item]] la façon dont des valeurs (particulièrement des valeurs numériques) seront affichées.
+
+Quelques exemples à essayer (ici j'utilise des valeurs numériques littérales, mais on pourrait aussi utiliser des variables):
+
+!!! Exemple 2.6d -- Formattage avancé&lt;iframe width=&quot;100%&quot; height=&quot;475&quot; src=&quot;https://dotnetfiddle.net/Widget/8Zw8oZ&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;!--
+---
+
+&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://web.microsoftstream.com/embed/video/ec1ad4ca-4d50-4f3d-87b2-c475eaf0e55d?autoplay=false&amp;amp;showinfo=true&quot; allowfullscreen style=&quot;border:none;&quot;&gt;&lt;/iframe&gt;
+--&gt;</pre>
+</div>
+<div bag="default" created="20210208150412375" modified="20241014203648853" revision="0" tags="video [[02 Variables]]" title="02.07 La saisie clavier" type="text/vnd.tiddlywiki">
+<pre>Comme déjà vu avec l'exemple de la calcultarice ([[exercices 1.4 et suivants|01.Exercices]]), on peut récupérer une saisie clavier avec `System.Console.ReadLine()`.
+
+Cette méthode retourne ''toujours'' une chaîne de caractères, de sorte qu'il faut la convertir en valeur numérique au besoin pour faire des calculs.
+
+!!! Exemple 2.7a -- Utilisation de ReadLine()&lt;iframe width=&quot;100%&quot; height=&quot;475&quot; src=&quot;https://dotnetfiddle.net/Widget/Lnom03&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;!--
+---
+
+&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://web.microsoftstream.com/embed/video/fd4391ec-7a86-4795-b892-1da0779cc7ba?autoplay=false&amp;amp;showinfo=true&quot; allowfullscreen style=&quot;border:none;&quot;&gt;&lt;/iframe&gt;
+--&gt;</pre>
+</div>
+<div bag="default" created="20210308144112846" modified="20241014155154340" revision="0" tags="[[02 Variables]]" title="02.08 Variables nullables" type="text/vnd.tiddlywiki">
+<pre>La valeur `null` repr&#233;sente l&#39;absence de r&#233;f&#233;rence ou l&#39;absence de valeur. En C# moderne, il faut distinguer &#39;&#39;les types valeur nullables&#39;&#39; et &#39;&#39;les types r&#233;f&#233;rence nullables&#39;&#39;.
+
+! Types valeur nullables
+
+Un type valeur comme `int`, `double` ou `bool` ne contient normalement pas `null`. Le suffixe `?` cr&#233;e une version nullable:
+
+```cs
+int? age = null;
+age = 15;
+
+double?[] mesures = new double?[10];
+```
+
+`int?` est une &#233;criture abr&#233;g&#233;e de `Nullable&lt;int&gt;`. On peut v&#233;rifier la pr&#233;sence d&#39;une valeur avec `age.HasValue` et lire cette valeur avec `age.Value`, mais on pr&#233;f&#232;re souvent tester `age is not null` avant de l&#39;utiliser.
+
+! Types r&#233;f&#233;rence nullables
+
+Une r&#233;f&#233;rence comme `string` peut techniquement &#234;tre `null`. Lorsque le &#39;&#39;contexte nullable&#39;&#39; est activ&#233;, le compilateur analyse le code et produit des avertissements:
+
+```cs
+string nom = &quot;Young Bro&quot;;  // ne devrait pas &#234;tre null
+string? surnom = null;     // null est pr&#233;vu et doit &#234;tre v&#233;rifi&#233;
+
+if (surnom is not null)
+{
+    Console.WriteLine(surnom.Length);
+}
+```
+
+Depuis .NET 6, les nouveaux projets activent normalement cette analyse. Le `?` plac&#233; sur un type r&#233;f&#233;rence est surtout une information destin&#233;e au compilateur et aux programmeurs; il ne cr&#233;e pas un nouveau type &#224; l&#39;ex&#233;cution.
+
+! Op&#233;rateurs utiles
+
+```cs
+int longueur = surnom?.Length ?? 0;       // acc&#232;s prudent puis valeur de secours
+surnom ??= &quot;Bro&quot;;                        // affecte seulement si surnom est null
+```
+
+* `?.` interrompt l&#39;acc&#232;s si la r&#233;f&#233;rence vaut `null`;
+* `??` fournit une valeur de remplacement;
+* `??=` affecte une valeur lorsque la variable vaut `null`;
+* `!` supprime un avertissement du compilateur, mais &#39;&#39;n&#39;emp&#234;che pas&#39;&#39; une erreur &#224; l&#39;ex&#233;cution. Il doit rester exceptionnel.
+
+&lt;p class=&quot;boite stop&quot;&gt;
+Une variable nullable exprime une absence r&#233;ellement possible dans le probl&#232;me. Elle ne doit pas servir &#224; &#233;viter l&#39;initialisation ou la validation des donn&#233;es.&lt;/p&gt;
+
+Documentation: [[S&#233;curit&#233; relative &#224; null|https://learn.microsoft.com/fr-fr/dotnet/csharp/fundamentals/null-safety/]].
+</pre>
+</div>
+<div created="20231011131716746" modified="20241021155059470" tags="[[02 Variables]]" title="02.Exercices">
+<pre># Continuez la calculatrice amorcée dans [[01.Exercices]] en suivant les directives pour [[Corriger l'erreur de division par zéro|https://learn.microsoft.com/fr-fr/visualstudio/get-started/csharp/tutorial-console?view=vs-2022#fix-the-divide-by-zero-error]] (''avec les adaptations nécessaires'' pour tenir compte des modifications faites aux numéros 1.8 (`Math.Pow()`) et 1.9 (`num3`)). ''Ne faites pas les sections qui suivent'' (c.-à-d. la section //Corriger l'erreur de format// et suivantes).
+
+# &lt;iframe height=&quot;800&quot; style=&quot;width: 100%;&quot; scrolling=&quot;no&quot; title=&quot;POO1 - Variables&quot; src=&quot;https://codepen.io/shrodi/embed/rNPBvxE?default-tab=result&amp;theme-id=47205&quot; frameborder=&quot;no&quot; loading=&quot;lazy&quot; allowtransparency=&quot;true&quot; allowfullscreen=&quot;true&quot;&gt;
+  See the Pen &lt;a href=&quot;https://codepen.io/shrodi/pen/rNPBvxE&quot;&gt;
+  POO1 - Variables&lt;/a&gt; by Eric (&lt;a href=&quot;https://codepen.io/shrodi&quot;&gt;@shrodi&lt;/a&gt;)
+  on &lt;a href=&quot;https://codepen.io&quot;&gt;CodePen&lt;/a&gt;.
+&lt;/iframe&gt;
+
+# &lt;iframe height=&quot;800&quot; style=&quot;width: 100%;&quot; scrolling=&quot;no&quot; title=&quot;POO1 - Variables - Déclarations&quot; src=&quot;https://codepen.io/shrodi/embed/poGoEyx?default-tab=result&amp;theme-id=47205&quot; frameborder=&quot;no&quot; loading=&quot;lazy&quot; allowtransparency=&quot;true&quot; allowfullscreen=&quot;true&quot;&gt;
+  See the Pen &lt;a href=&quot;https://codepen.io/shrodi/pen/poGoEyx&quot;&gt;
+  POO1 - Variables - Déclarations&lt;/a&gt; by Eric (&lt;a href=&quot;https://codepen.io/shrodi&quot;&gt;@shrodi&lt;/a&gt;)
+  on &lt;a href=&quot;https://codepen.io&quot;&gt;CodePen&lt;/a&gt;.
+&lt;/iframe&gt;
+
+# Dans un nouveau projet console C# Visual Studio, copiez puis corrigez le code suivant afin qu'il comoile, mais ''sans toucher aux types de variables déjà en place'':&lt;div&gt;
+
+```cs
+const decimal lbsParKg = 2.2m;
+float poids = 155.12;
+
+double masse = poids / lbsParKg;
+
+Console.WriteLine(&quot;Un poids de {poids} lbs correpond à une masse de {masse} kg.&quot;);
+```
+&lt;/div&gt;
+
+# Pourquoi utiliser des ''decimal'' au lieu de ''double''? Dans un nouveau projet terminal C# Visual Studio, écrivez un programme qui calcule et affiche la différence entre 1.18 et 0.08 (donc 1.18-0.08), d'abord en utilisant seulement le type ''double'', ensuite seulement le type ''decimal'': que remarquez-vous...?
+</pre>
+</div>
 
 
 
@@ -10817,9 +11191,10 @@ Documentation officielle: [[Installer Visual Studio|https://learn.microsoft.com/
 <div created="20220228135020747" modified="20250107140823153" tags="[[Table des matières]]" title="Semainier">
 <pre>!! Cours disponibles
 
-Mission actuellement debloquee par Doc T : &#39;&#39;1 sur 12&#39;&#39;.
+Mission actuellement debloquee par Doc T : &#39;&#39;2 sur 12&#39;&#39;.
 
 # [[01 Introduction]]
+# [[02 Variables]]
 
 Young Bro, les prochaines missions apparaitront lorsque Doc T donnera le feu vert.</pre>
 </div>
