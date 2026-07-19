@@ -10197,38 +10197,29 @@ double puissance = Math.Pow(10 /*base*/, 2 /*exposant*/);
 ```</pre>
 </div>
 <div bag="default" created="20210202211339110" modified="20241008175343490" revision="0" tags="[[01 Introduction]]" title="01.07 Environnement de développement" type="text/vnd.tiddlywiki">
-<pre>Donc, ''programmer = écrire du code''.
+<pre>Donc, &#39;&#39;programmer = &#233;crire du code&#39;&#39;, mais plusieurs outils participent &#224; la transformation du code en programme ex&#233;cutable.
 
-Mais dans quoi écrire ce code?
+* Un &#39;&#39;&#233;diteur de texte&#39;&#39; permet d&#39;&#233;crire des fichiers, sans n&#233;cessairement comprendre C#.
+* Un &#39;&#39;IDE&#39;&#39; (//Integrated Development Environment//) regroupe l&#39;&#233;diteur, la cr&#233;ation de projets, la compilation, l&#39;ex&#233;cution, le d&#233;bogage et les tests.
+* Le &#39;&#39;SDK .NET&#39;&#39; contient notamment le compilateur et les outils n&#233;cessaires pour construire et ex&#233;cuter les projets. Visual Studio utilise ce SDK en arri&#232;re-plan.
 
-# Dans un éditeur de texte simple (p.ex., le bloc-notes de Windows)
-#* Dans ce cas, on doit ensuite se charger d'appeler manuellement le compilateur ou l'interpréteur, et en plus on n'a pas de coloration du code en fonction des mots-clefs.
+Dans ce cours, nous utiliserons &#39;&#39;Visual Studio 2026&#39;&#39; avec &#39;&#39;.NET 10 LTS&#39;&#39;. Une autre version r&#233;cente de Visual Studio peut convenir, mais les noms et l&#39;emplacement de certains boutons peuvent diff&#233;rer.
 
-# Dans un éditeur de texte avancé (p.ex., [[MS VSCode|https://code.visualstudio.com/]], [[Notepad++|https://notepad-plus-plus.org/]], [[Sublime Text|https://www.sublimetext.com/]])
-#* Ces éditeurs offrent beaucoup de fonctionnalité aidant le développement, comme l'installation de greffons, coloration du code, appel facile de compilateurs/interpréteurs, etc.
+!! Cr&#233;er le premier projet
 
-# Dans un environnement de développement intégré (ou ''IDE'', //Integrated Development Environment//) (p.ex., [[Eclipse|https://www.eclipse.org/ide/]], [[MS Visual Studio|https://visualstudio.microsoft.com/fr/]], [[IntelliJ|https://www.jetbrains.com/idea/]], [[Netbeans|https://netbeans.apache.org/]])
-#* Ces logiciels poussent encore plus loin les fonctionnalités en offrant notamment des outils de débogage et de test, en plus de permettre l'exécution des programmes écrits du simple clic d'un bouton.
+# Ouvrez Visual Studio et choisissez &#39;&#39;Cr&#233;er un projet&#39;&#39;.
+# S&#233;lectionnez &#39;&#39;Application console&#39;&#39; en C#.
+# Choisissez &#39;&#39;.NET 10.0&#39;&#39; comme framework.
+# Nommez le projet, puis cliquez sur &#39;&#39;Cr&#233;er&#39;&#39;.
+# Ex&#233;cutez-le avec `Ctrl+F5`.
 
-Dans ce cours, nous utiliserons l'IDE MS Visual Studio pour écrire nos programmes en C#.
+Les nouveaux mod&#232;les peuvent placer directement les instructions dans `Program.cs`, sans afficher une classe `Program` ni une m&#233;thode `Main`. Ce sont des &#39;&#39;instructions de niveau sup&#233;rieur&#39;&#39;: le compilateur cr&#233;e la structure n&#233;cessaire. Les deux formes sont valides.
 
-&lt;p class=&quot;boite&quot;&gt;
+&lt;p class=&quot;boite note&quot;&gt;
+Le fichier `.csproj` d&#233;crit le projet et sa version de .NET. Les fichiers `.cs` contiennent le code source. Les dossiers `bin` et `obj` sont g&#233;n&#233;r&#233;s automatiquement et ne doivent normalement pas &#234;tre modifi&#233;s &#224; la main.&lt;/p&gt;
 
-! Où est le programme???
-
-Si le langage C# est [[compilé dans un fichier|01.05 La compilation / l'interprétation]], où se trouve-t-il quand on exécute un programme à partir de Visual Studio?
-
-[img[https://i.imgur.com/CxoTwvN.png]]
-
-[img[https://i.imgur.com/vlo76Sa.png]]
-
-[img[https://i.imgur.com/HQRmjHq.png]]
-
-[img[https://i.imgur.com/Cs4R1eG.png]]
-
-[img[https://i.imgur.com/wbbKkqV.png]]
-
-&lt;/p&gt;</pre>
+Documentation: [[Installer .NET sous Windows|https://learn.microsoft.com/fr-fr/dotnet/core/install/windows]] et [[instructions de niveau sup&#233;rieur|https://learn.microsoft.com/fr-fr/dotnet/csharp/fundamentals/program-structure/top-level-statements]].
+</pre>
 </div>
 <div bag="default" created="20210202221714830" modified="20241008194834112" revision="0" tags="[[01 Introduction]]" title="01.Exercices" type="text/vnd.tiddlywiki">
 <pre># Pour chacun des éléments suivants, dites s'il s'agit d'un intrant ou d'un extrant:
@@ -10392,13 +10383,97 @@ Notez de plusque chaque instruction est terminée par un point-virgule: `;`
 
 
 
+quot;&#194;ge accept&#233;: {age}&quot;);
+}
+else
+{
+    Console.WriteLine(&quot;Veuillez entrer un entier positif.&quot;);
+}
+```
+
+V&#233;rifiez &#233;galement les indices et les diviseurs avant l&#39;op&#233;ration. Attention: une division enti&#232;re par z&#233;ro lance `DivideByZeroException`, tandis qu&#39;une division de nombres &#224; virgule flottante peut produire `Infinity` ou `NaN`.
+
+! Attraper une exception pr&#233;cise
+
+```cs
+try
+{
+    string texte = File.ReadAllText(&quot;mission.txt&quot;);
+    Console.WriteLine(texte);
+}
+catch (FileNotFoundException e)
+{
+    Console.WriteLine(quot;Fichier introuvable: {e.FileName}&quot;);
+}
+catch (UnauthorizedAccessException)
+{
+    Console.WriteLine(&quot;Acc&#232;s refus&#233; au fichier.&quot;);
+}
+```
+
+Attrapez le type le plus pr&#233;cis possible, seulement &#224; un endroit o&#249; le programme peut r&#233;cup&#233;rer, ajouter un contexte utile ou informer correctement l&#39;utilisateur. Ne laissez jamais un `catch` vide.
+
+! Lib&#233;rer les ressources
+
+`finally` s&#39;ex&#233;cute qu&#39;une exception soit lev&#233;e ou non. Pour les objets qui impl&#233;mentent `IDisposable`, une instruction `using` est g&#233;n&#233;ralement plus simple et garantit leur lib&#233;ration:
+
+```cs
+using StreamReader lecteur = File.OpenText(&quot;mission.txt&quot;);
+Console.WriteLine(lecteur.ReadToEnd());
+```
+
+Documentation: [[Bonnes pratiques relatives aux exceptions|https://learn.microsoft.com/fr-fr/dotnet/standard/exceptions/best-practices-for-exceptions]].
+</pre>
+</div>
 
 
 
 
 
+quot;*** La lettre {lettre} est pr&#233;sente! ***&quot;;
+}
+```
 
+```cs
+[TestMethod]
+public void MessageLettrePresente_L_RetourneLeMessageAttendu()
+{
+    string resultat = Sortie.MessageLettrePresente(&quot;l&quot;);
 
+    Assert.AreEqual(&quot;*** La lettre l est pr&#233;sente! ***&quot;, resultat);
+}
+```
+
+! Si la capture de Console.Out est n&#233;cessaire
+
+`Console.Out` est un &#233;tat global. Il faut toujours restaurer la sortie originale, m&#234;me si le test &#233;choue, et tenir compte du s&#233;parateur de ligne du syst&#232;me:
+
+```cs
+[TestMethod]
+public void AfficherMission_EcritLeTitre()
+{
+    TextWriter sortieOriginale = Console.Out;
+    using StringWriter capture = new StringWriter();
+
+    try
+    {
+        Console.SetOut(capture);
+        Sortie.AfficherMission(&quot;Boucles&quot;);
+
+        Assert.AreEqual(
+            quot;Mission: Boucles{Environment.NewLine}&quot;,
+            capture.ToString());
+    }
+    finally
+    {
+        Console.SetOut(sortieOriginale);
+    }
+}
+```
+
+Les tests qui modifient la console ne doivent pas s&#39;ex&#233;cuter en parall&#232;le. Cette technique reste donc une solution de dernier recours; privil&#233;giez la s&#233;paration entre logique et affichage.
+</pre>
+</div>
 
 
 
@@ -10738,13 +10813,21 @@ img.normal {
 &lt;/div&gt;</pre>
 </div>
 <div bag="default" created="20210205130637103" list="" modified="20231001133248630" revision="0" title="Étapes d'installation Visual Studio" type="text/vnd.tiddlywiki">
-<pre># Au https://portal.azure.com/#view/Microsoft_Azure_Education/EducationMenuBlade/~/software:  [img[https://i.imgur.com/XiXe6zW.png]]
+<pre>! Installation recommand&#233;e en 2026
 
-# [img[https://i.imgur.com/RpN6YVz.png]]
+# T&#233;l&#233;chargez [[Visual Studio Community|https://visualstudio.microsoft.com/fr/vs/community/]]. Cette &#233;dition gratuite suffit pour les exercices du cours.
+# Lancez l&#39;installateur, puis cochez la charge de travail &#39;&#39;D&#233;veloppement Desktop en .NET&#39;&#39;.
+# Conservez les composants recommand&#233;s, notamment le SDK .NET 10 LTS.
+# Une fois l&#39;installation termin&#233;e, ouvrez Visual Studio et choisissez &#39;&#39;Cr&#233;er un projet&#39;&#39;.
+# S&#233;lectionnez &#39;&#39;Application console&#39;&#39;, langage C#, puis v&#233;rifiez que le framework propos&#233; est &#39;&#39;.NET 10.0&#39;&#39;.
+# Donnez un nom simple au projet, sans accents ni caract&#232;res sp&#233;ciaux, puis cliquez sur &#39;&#39;Cr&#233;er&#39;&#39;.
+# Ex&#233;cutez le projet avec le bouton vert ou avec `Ctrl+F5`.
 
-# [img[https://i.imgur.com/ahl37E0.png]]
+&lt;p class=&quot;boite note&quot;&gt;
+Une licence institutionnelle ou l&#39;&#233;dition Enterprise n&#39;est pas n&#233;cessaire pour suivre ce cours. Si le c&#233;gep fournit une &#233;dition particuli&#232;re, suivez ses consignes; le code C# du cours reste le m&#234;me.&lt;/p&gt;
 
-#&gt; Quand on vous demandera de vous connecter, utilisez le même identifiant que pour la connexion au portail Azure.</pre>
+Documentation officielle: [[Installer Visual Studio|https://learn.microsoft.com/fr-fr/visualstudio/install/install-visual-studio]].
+</pre>
 </div>
 <div bag="default" created="20181113131413318" modified="20181113131434698" revision="0" tags="[[Table des matières]]" title="Glossaire" type="text/vnd.tiddlywiki">
 <pre>&lt;div class=&quot;tc-table-of-contents&quot;&gt;
