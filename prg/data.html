@@ -10383,97 +10383,13 @@ Notez de plusque chaque instruction est terminée par un point-virgule: `;`
 
 
 
-quot;&#194;ge accept&#233;: {age}&quot;);
-}
-else
-{
-    Console.WriteLine(&quot;Veuillez entrer un entier positif.&quot;);
-}
-```
-
-V&#233;rifiez &#233;galement les indices et les diviseurs avant l&#39;op&#233;ration. Attention: une division enti&#232;re par z&#233;ro lance `DivideByZeroException`, tandis qu&#39;une division de nombres &#224; virgule flottante peut produire `Infinity` ou `NaN`.
-
-! Attraper une exception pr&#233;cise
-
-```cs
-try
-{
-    string texte = File.ReadAllText(&quot;mission.txt&quot;);
-    Console.WriteLine(texte);
-}
-catch (FileNotFoundException e)
-{
-    Console.WriteLine(quot;Fichier introuvable: {e.FileName}&quot;);
-}
-catch (UnauthorizedAccessException)
-{
-    Console.WriteLine(&quot;Acc&#232;s refus&#233; au fichier.&quot;);
-}
-```
-
-Attrapez le type le plus pr&#233;cis possible, seulement &#224; un endroit o&#249; le programme peut r&#233;cup&#233;rer, ajouter un contexte utile ou informer correctement l&#39;utilisateur. Ne laissez jamais un `catch` vide.
-
-! Lib&#233;rer les ressources
-
-`finally` s&#39;ex&#233;cute qu&#39;une exception soit lev&#233;e ou non. Pour les objets qui impl&#233;mentent `IDisposable`, une instruction `using` est g&#233;n&#233;ralement plus simple et garantit leur lib&#233;ration:
-
-```cs
-using StreamReader lecteur = File.OpenText(&quot;mission.txt&quot;);
-Console.WriteLine(lecteur.ReadToEnd());
-```
-
-Documentation: [[Bonnes pratiques relatives aux exceptions|https://learn.microsoft.com/fr-fr/dotnet/standard/exceptions/best-practices-for-exceptions]].
-</pre>
-</div>
 
 
 
 
 
-quot;*** La lettre {lettre} est pr&#233;sente! ***&quot;;
-}
-```
 
-```cs
-[TestMethod]
-public void MessageLettrePresente_L_RetourneLeMessageAttendu()
-{
-    string resultat = Sortie.MessageLettrePresente(&quot;l&quot;);
 
-    Assert.AreEqual(&quot;*** La lettre l est pr&#233;sente! ***&quot;, resultat);
-}
-```
-
-! Si la capture de Console.Out est n&#233;cessaire
-
-`Console.Out` est un &#233;tat global. Il faut toujours restaurer la sortie originale, m&#234;me si le test &#233;choue, et tenir compte du s&#233;parateur de ligne du syst&#232;me:
-
-```cs
-[TestMethod]
-public void AfficherMission_EcritLeTitre()
-{
-    TextWriter sortieOriginale = Console.Out;
-    using StringWriter capture = new StringWriter();
-
-    try
-    {
-        Console.SetOut(capture);
-        Sortie.AfficherMission(&quot;Boucles&quot;);
-
-        Assert.AreEqual(
-            quot;Mission: Boucles{Environment.NewLine}&quot;,
-            capture.ToString());
-    }
-    finally
-    {
-        Console.SetOut(sortieOriginale);
-    }
-}
-```
-
-Les tests qui modifient la console ne doivent pas s&#39;ex&#233;cuter en parall&#232;le. Cette technique reste donc une solution de dernier recours; privil&#233;giez la s&#233;paration entre logique et affichage.
-</pre>
-</div>
 
 
 
